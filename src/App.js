@@ -1,9 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import Root from './components/Root';
+import {Provider} from 'react-redux';
+import {ConnectedRouter} from 'react-router-redux';
+
+import history from './history';
+import store from './redux';
 
 class App extends Component {
   render() {
     return (
-      <div>hello 22</div>
+      <Provider store={store}>
+        <ConnectedRouter history = {history}>
+          <Root/>
+        </ConnectedRouter>
+      </Provider>
     );
   }
 }
