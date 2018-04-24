@@ -4,11 +4,12 @@ import SignUpForm from '../auth/SignUpForm';
 import {Route, NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {signUp, moduleName} from "../../ducks/auth";
-import Loader from '../Loader';
+import Loader from '../common/Loader';
+import ErrorMsg from '../common/ErrorMsg';
 
 class AuthPage extends Component {
   render() {
-    const {loading} = this.props;
+    const {loading, error} = this.props;
     return (
       <div>
         <h1>Auth page</h1>
@@ -21,6 +22,8 @@ class AuthPage extends Component {
         <Route path="/auth/signin" render={() => <SignInForm onSubmit={this.handleSignIn}/>}/>
         <Route path="/auth/signup" render={() => <SignUpForm onSubmit={this.handleSignUp}/>}/>
         {loading && <Loader />}
+        {error && <ErrorMsg error={error} />}
+
       </div>
     )
   }
@@ -31,5 +34,6 @@ class AuthPage extends Component {
 }
 
 export default connect(state => ({
-  loading: state[moduleName].loading
+  loading: state[moduleName].loading,
+  error: state[moduleName].error
 }), {signUp})(AuthPage);
