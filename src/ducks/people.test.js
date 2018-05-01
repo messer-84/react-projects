@@ -21,4 +21,5 @@ it('should dispatch person with id', () => {
     type: ADD_PERSON,
     payload: {id, ...person}
   }));
+
 });
